@@ -5,8 +5,9 @@ contextBridge.exposeInMainWorld('api', {
     // Janela
     minimize: () => ipcRenderer.send('window-minimize'),
     maximize: () => ipcRenderer.send('window-maximize'),
-    close: () => ipcRenderer.send('window-close')
+    close: () => ipcRenderer.send('window-close'),
     detectGpu: () => ipcRenderer.invoke('detect-gpu'),
+    selectFolder: () => ipcRenderer.invoke('select-folder')
 
     // Futuramente: instalar, remover, listar jogos...
 

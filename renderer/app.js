@@ -27,7 +27,7 @@ function showPage(name){
 function toggleView(){
     const btn = document.getElementById('btn-view')
     btn.classList.toggle('active')
-    const gride = document.querySelectorAll('.games-grid')
+    const grids = document.querySelectorAll('.games-grid')
     const isList = btn.classList.contains('active')
     grids.forEach( g=> {
         g.style.gridTemplateColumns = isList ? '1fr' : 'repeat(auto-fill, minmax(100px, 1fr)'
@@ -72,18 +72,21 @@ function renderGames(){
         empty.style.display = 'flex'
         return
     }
-
+    
+    // Remove grids antetiores (mantém o empty-state no DOM)
     empty.style.display = 'none'
-}
+    area.querySelectorAll('.sec-label, .games-grid').forEach( el => el.remove())
 
-// Remove grids antetiores (mantém o empty-state no DOM)
-area.querySelectorAll('.sec-label, .games-grid').forEach(el => el.remove())
+    const label = document.createElement('div')
+    label.className = 'sec-label'
+    label.textContent = 'Adicionamos manualmente'
 
-const grid = document.createElement('div')
-grid.className = 'games-grid'
 
-games.forEach(game => {
-    const car = document.createElement('div')
+    const grid = document.createElement('div')
+    grid.className = 'games-grid'
+    
+    games.forEach(game => {
+    const card = document.createElement('div')
     card.className = 'game-card'
     card.innerHTML =
      `
@@ -100,18 +103,45 @@ games.forEach(game => {
     grid.appendChild(card)
 })
 
-const label = document.createElement('div')
-label.className = 'sec-label'
-label.textContent = 'Adicionando manualmente'
-
+  
 area.insertBefore(label,empty)
 area.insertBefore(grid, empty)
 
+
+}
+
+document.getElementById('btn-add-game').addEventListener('click',addGame)
+document.getElementById('btn-add-first').addEventListener('click',addGame)
+
+// Adicionar jogo
+
+async function addGame() {
+    const folderPath = await window.api.selectFolder()
+    if(!folderPath) return // Usuário Cancelou
+
+
+    // Pega o nome da pasta como nome do jogo
+    const name = folderPath.split('\\').pop() || folderPath.split('/').pop()
+
+    // Adiciona na lista
+    games.push({
+        name: name,
+        path: folderPath,
+        installed: false
+    })
+
+    renderGames()
+
+    document.getElementById('btn-add-game').addEventListener('click', addGame)
+    document.getElementById('btn-add-first').addEventListener('click', addGame)
+}
+
 // Detectar GPU ao abrir
-window.api.detectGPU().then(gpu => {
-    document.getElementyById('gpu-name').innerHTML =
+window.api.detectGpu().then(gpu => {
+    document.getElementById('gpu-name').innerHTML =
     `<b style="color:var(--text)">GPU detectada:</b> ${gpu}`
 })
+
 
 // Inicializar
 renderGames()
