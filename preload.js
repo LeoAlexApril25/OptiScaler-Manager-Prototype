@@ -6,9 +6,7 @@ contextBridge.exposeInMainWorld('api', {
     minimize: () => ipcRenderer.send('window-minimize'),
     maximize: () => ipcRenderer.send('window-maximize'),
     close: () => ipcRenderer.send('window-close')
-
-    //
-    detectGpu: () => ipcRenderer.invoke('detect-gpu')
+    detectGpu: () => ipcRenderer.invoke('detect-gpu'),
 
     // Futuramente: instalar, remover, listar jogos...
 

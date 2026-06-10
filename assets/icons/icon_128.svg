@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 512 512" role="img">
+  <title>OptiScaler Manager Eagle Icon 128</title>
+  <defs>
+    <radialGradient id="bg2" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#1c1a14"/>
+      <stop offset="100%" stop-color="#0a0a08"/>
+    </radialGradient>
+    <linearGradient id="gm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5d060"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#8a6818"/>
+    </linearGradient>
+    <linearGradient id="wl2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d060"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#4a3808"/>
+    </linearGradient>
+    <linearGradient id="wr2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5d060"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#4a3808"/>
+    </linearGradient>
+    <linearGradient id="hg2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c0bfb0"/>
+    </linearGradient>
+    <linearGradient id="bg2b" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8e0c8"/>
+      <stop offset="100%" stop-color="#8a7040"/>
+    </linearGradient>
+    <clipPath id="c2"><rect width="512" height="512" rx="110"/></clipPath>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bg2)"/>
+  <rect width="512" height="512" rx="110" fill="none" stroke="#c9a227" stroke-width="3" stroke-opacity="0.4"/>
+  <g clip-path="url(#c2)">
+    <path d="M256,260 Q200,220 120,160 Q90,145 60,155 Q80,170 95,185 Q60,175 40,190 Q70,198 90,210 Q55,205 42,225 Q75,228 100,238 Q68,240 58,260 Q90,258 118,265 Q88,272 82,292 Q112,285 142,290 Q118,300 116,320 Q145,308 170,315 Q155,328 160,348 Q185,332 210,338 Q200,355 208,372 Q230,352 256,355 Z" fill="url(#wl2)"/>
+    <path d="M256,260 Q312,220 392,160 Q422,145 452,155 Q432,170 417,185 Q452,175 472,190 Q442,198 422,210 Q457,205 470,225 Q437,228 412,238 Q444,240 454,260 Q422,258 394,265 Q424,272 430,292 Q400,285 370,290 Q394,300 396,320 Q367,308 342,315 Q357,328 352,348 Q327,332 302,338 Q312,355 304,372 Q282,352 256,355 Z" fill="url(#wr2)"/>
+    <ellipse cx="256" cy="330" rx="52" ry="68" fill="url(#bg2b)"/>
+    <path d="M214,375 Q256,390 298,375 Q285,405 270,420 Q256,428 242,420 Q227,405 214,375 Z" fill="url(#gm)"/>
+    <path d="M236,248 Q256,240 276,248 L278,272 Q256,265 234,272 Z" fill="url(#hg2)"/>
+    <ellipse cx="256" cy="218" rx="46" ry="44" fill="url(#hg2)"/>
+    <path d="M216,210 Q220,185 256,178 Q292,185 296,210 Q278,200 256,198 Q234,200 216,210 Z" fill="url(#gm)"/>
+    <path d="M220,215 Q232,205 256,208 Q280,205 292,215 Q288,232 256,236 Q224,232 220,215 Z" fill="#2a2218" fill-opacity="0.85"/>
+    <ellipse cx="237" cy="218" rx="9" ry="9" fill="#c9a227"/>
+    <ellipse cx="237" cy="218" rx="5" ry="5" fill="#0a0806"/>
+    <ellipse cx="234" cy="215" rx="2" ry="2" fill="#ffffff" fill-opacity="0.9"/>
+    <ellipse cx="275" cy="218" rx="9" ry="9" fill="#c9a227"/>
+    <ellipse cx="275" cy="218" rx="5" ry="5" fill="#0a0806"/>
+    <ellipse cx="272" cy="215" rx="2" ry="2" fill="#ffffff" fill-opacity="0.9"/>
+    <path d="M242,232 Q256,228 270,232 Q268,244 256,256 Q244,244 242,232 Z" fill="url(#gm)"/>
+  </g>
+  <rect x="3" y="3" width="506" height="506" rx="108" fill="none" stroke="#c9a227" stroke-width="3" stroke-opacity="0.5"/>
+</svg>

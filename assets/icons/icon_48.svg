@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 512 512" role="img">
+  <title>OptiScaler Manager Eagle Icon 48</title>
+  <defs>
+    <linearGradient id="gm3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5d060"/>
+      <stop offset="100%" stop-color="#8a6818"/>
+    </linearGradient>
+    <linearGradient id="wl3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d060"/>
+      <stop offset="100%" stop-color="#4a3808"/>
+    </linearGradient>
+    <linearGradient id="wr3" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5d060"/>
+      <stop offset="100%" stop-color="#4a3808"/>
+    </linearGradient>
+    <linearGradient id="hg3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c0bfb0"/>
+    </linearGradient>
+    <clipPath id="c3"><rect width="512" height="512" rx="110"/></clipPath>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="#0d0d0a"/>
+  <rect width="512" height="512" rx="110" fill="none" stroke="#c9a227" stroke-width="8" stroke-opacity="0.5"/>
+  <g clip-path="url(#c3)">
+    <path d="M256,260 Q200,220 120,160 Q90,145 60,155 Q80,175 100,210 Q68,240 58,260 Q90,258 118,265 Q88,285 116,320 Q155,308 210,338 Q200,355 208,372 Q230,352 256,355 Z" fill="url(#wl3)"/>
+    <path d="M256,260 Q312,220 392,160 Q422,145 452,155 Q432,175 412,210 Q444,240 454,260 Q422,258 394,265 Q424,285 396,320 Q357,308 302,338 Q312,355 304,372 Q282,352 256,355 Z" fill="url(#wr3)"/>
+    <ellipse cx="256" cy="316" rx="50" ry="65" fill="#c8b87a"/>
+    <ellipse cx="256" cy="218" rx="46" ry="44" fill="url(#hg3)"/>
+    <path d="M216,210 Q220,185 256,178 Q292,185 296,210 Q278,200 256,198 Q234,200 216,210 Z" fill="url(#gm3)"/>
+    <path d="M220,215 Q256,205 292,215 Q288,232 256,236 Q224,232 220,215 Z" fill="#1a1408" fill-opacity="0.9"/>
+    <ellipse cx="237" cy="218" rx="10" ry="10" fill="#c9a227"/>
+    <ellipse cx="237" cy="218" rx="6" ry="6" fill="#080604"/>
+    <ellipse cx="275" cy="218" rx="10" ry="10" fill="#c9a227"/>
+    <ellipse cx="275" cy="218" rx="6" ry="6" fill="#080604"/>
+    <path d="M242,232 Q256,228 270,232 Q256,252 242,232 Z" fill="url(#gm3)"/>
+    <path d="M214,375 Q256,395 298,375 Q256,425 214,375 Z" fill="url(#gm3)"/>
+  </g>
+  <rect x="4" y="4" width="504" height="504" rx="107" fill="none" stroke="#c9a227" stroke-width="5" stroke-opacity="0.5"/>
+</svg>

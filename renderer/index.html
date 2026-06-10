@@ -3,38 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src https://cdn.jsdelivr.net">
+    content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../node_modules/@tabler/icons-webfont/dist/tabler-icons.min.css">
     <title>OptiScaler Manager</title>
 </head>
 <body>
     <div id="app">
 
-
-        <!-- Titlebar customizada-->
-         <div id="titlebar">
-            <div class="win-btns">
-                <button id="wb wb-close" onclick="window.api.close()"></button>
-                <button id="wb wb-min" onclick="window.api.minimize()"></button>
-                <button id="wb wb-max" onclick="window.api.maximize()"></button>
-            </div>
-
-            <span class="tb-title">OptiScaler Manager</span>
-         </div>
-
-        <!-- Topbar -->
-         <div class="topbar">
-            <!-- nav, busca e ações vão aqui — igual ao protótipo -->
-
-         </div>
-
-        <!-- Conteúdo -->
-         <div class="content" id="content">
-            <!-- nav, busca e ações vão aqui — igual ao protótipo -->
-
-         </div>
-
-
+  <!-- TITLEBAR -->
+  <div class="titlebar">
+    <div class="win-btns">
+      <button class="wb wb-close"  onclick="window.api.close()"></button>
+      <button class="wb wb-min"    onclick="window.api.minimize()"></button>
+      <button class="wb wb-max"    onclick="window.api.maximize()"></button>
     </div>
-    
+    <span class="tb-title">OptiScaler Manager</span>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <!-- NAV -->
+    <div class="nav-group">
+      <div class="tt">
+        <button class="nav-btn active" id="nav-games" onclick="showPage('games')">
+          <i class="ti ti-device-gamepad-2"></i>
+        </button>
+        <span class="tt-label">Jogos</span>
+      </div>
+      <div class="tt">
+        <button class="nav-btn" id="nav-library" onclick="showPage('library')">
+          <i class="ti ti-stack-2"></i>
+        </button>
+        <span class="tt-label">Biblioteca</span>
+      </div>
+      <div class="tt">
+        <button class="nav-btn" id="nav-settings" onclick="showPage('settings')">
+          <i class="ti ti-settings"></i>
+        </button>
+        <span class="tt-label">Configurações</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BUSCA -->
+    <div class="search-wrap">
+      <div class="search-box">
+        <i class="ti ti-search"></i>
+        <input id="search-input" placeholder="Buscar jogo...">
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- AÇÕES JOGOS -->
+    <div class="action-group" id="ag-games">
+      <div class="tt">
+        <button class="action-btn" id="btn-add-game">
+          <i class="ti ti-plus"></i>
+        </button>
+        <span class="tt-label">Adicionar jogo</span>
+      </div>
+      <div class="tt">
+        <button class="action-btn">
+          <i class="ti ti-refresh"></i>
+        </button>
+        <span class="tt-label">Atualizar lista</span>
+      </div>
+      <div class="tt">
+        <button class="action-btn" id="btn-view" onclick="toggleView()">
+          <i class="ti ti-layout-grid"></i>
+        </button>
+        <span class="tt-label">Alternar vista</span>
+      </div>
+    </div>
+
+    <!-- AÇÕES BIBLIOTECA -->
+    <div class="action-group" id="ag-library" style="display:none">
+      <div class="tt">
+        <button class="action-btn"><i class="ti ti-download"></i></button>
+        <span class="tt-label">Baixar versão</span>
+      </div>
+      <div class="tt">
+        <button class="action-btn"><i class="ti ti-refresh"></i></button>
+        <span class="tt-label">Atualizar lista</span>
+      </div>
+    </div>
+
+    <!-- AÇÕES CONFIGURAÇÕES -->
+    <div class="action-group" id="ag-settings" style="display:none">
+      <div class="tt">
+        <button class="action-btn"><i class="ti ti-rotate"></i></button>
+        <span class="tt-label">Restaurar padrões</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="content">
+
+    <!-- PÁGINA: JOGOS -->
+    <div class="page active" id="page-games">
+      <div class="games-area" id="games-area">
+        <!-- preenchido pelo app.js -->
+        <div class="empty-state" id="empty-state">
+          <i class="ti ti-device-gamepad-2"></i>
+          <p>Nenhum jogo adicionado ainda</p>
+          <button class="btn-primary" id="btn-add-first">
+            + Adicionar primeiro jogo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PÁGINA: BIBLIOTECA -->
+    <div class="page" id="page-library">
+      <div class="lib-tabs">
+        <div class="lib-tab active" onclick="setLibTab(this)">Todas</div>
+        <div class="lib-tab" onclick="setLibTab(this)">FSR 4</div>
+        <div class="lib-tab" onclick="setLibTab(this)">FSR 3.1</div>
+        <div class="lib-tab" onclick="setLibTab(this)">DLSS</div>
+        <div class="lib-tab" onclick="setLibTab(this)">XeSS</div>
+        <div class="lib-tab" onclick="setLibTab(this)">OptiFG</div>
+      </div>
+      <div class="lib-scroll">
+        <div class="lib-grid" id="lib-grid">
+          <!-- preenchido pelo app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PÁGINA: CONFIGURAÇÕES -->
+    <div class="page" id="page-settings">
+      <div class="settings-area">
+        <div class="s-section">
+          <h3>Upscaler padrão global</h3>
+          <div class="s-row">
+            <div>
+              <div class="s-label">Upscaler</div>
+              <div class="s-desc">Usado quando não configurado por jogo</div>
+            </div>
+            <select class="sel" id="cfg-upscaler">
+              <option value="auto">Auto</option>
+              <option value="fsr31">FSR 3.1</option>
+              <option value="fsr31_12">FSR 4</option>
+              <option value="xess">XeSS</option>
+              <option value="dlss">DLSS</option>
+            </select>
+          </div>
+          <div class="s-row">
+            <span class="s-label">Frame Generation</span>
+            <select class="sel" id="cfg-fg">
+              <option value="auto">Auto (desativado)</option>
+              <option value="fsrfg">FSR FG</option>
+              <option value="xefg">XeFG</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="s-section">
+          <h3>Spoofing de GPU</h3>
+          <div class="s-row">
+            <div>
+              <div class="s-label">Ativar spoofing DXGI</div>
+              <div class="s-desc">Necessário para AMD/Intel usarem DLSS</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="cfg-spoof" checked>
+              <div class="tslider"></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="s-section">
+          <h3>Sharpening (RCAS)</h3>
+          <div class="s-row">
+            <div>
+              <div class="s-label">Ativar RCAS</div>
+              <div class="s-desc">Reduz o borrão dos upscalers</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="cfg-rcas">
+              <div class="tslider"></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="s-section">
+          <h3>Sobre</h3>
+          <div style="font-size:11px;color:var(--text2);line-height:2">
+            <div><b style="color:var(--text)">Versão do app:</b> 1.0.0</div>
+            <div><b style="color:var(--text)">OptiScaler bundled:</b> 0.9.0-pre12</div>
+            <div id="gpu-name"><b style="color:var(--text)">GPU detectada:</b> Detectando...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal do Jogo-->
+ <div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-cover" id="modal-cover">
+        <i class="ti ti-device-gamepad-2" style="font-size:32px;color:#555"></i>
+      </div>
+      <div class="modal-info">
+        <h2 id="modal-title">Jogo</h2>
+        <div class="modal-path" id="modal-path">—</div>
+        <span class="modal-badge badge-ok" id="modal-status">OptiScaler instalado</span>
+      </div>
+    </div>
+    <div class="modal-fields">
+      <div class="modal-field">
+        <label>DLL name</label>
+        <select id="mf-dll">
+          <option value="dxgi.dll">dxgi.dll (padrão)</option>
+          <option value="winmm.dll">winmm.dll (Vulkan)</option>
+          <option value="version.dll">version.dll</option>
+          <option value="d3d12.dll">d3d12.dll</option>
+          <option value="dbghelp.dll">dbghelp.dll</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Upscaler</label>
+        <select id="mf-upscaler">
+          <option value="auto">Auto</option>
+          <option value="fsr31_12">FSR 4</option>
+          <option value="fsr31">FSR 3.1</option>
+          <option value="xess">XeSS</option>
+          <option value="dlss">DLSS</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Qualidade</label>
+        <select id="mf-quality">
+          <option value="auto">Auto</option>
+          <option value="Quality">Quality</option>
+          <option value="Balanced">Balanced</option>
+          <option value="Performance">Performance</option>
+          <option value="UltraPerformance">Ultra Performance</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Frame Generation</label>
+        <select id="mf-fg">
+          <option value="auto">Desativado</option>
+          <option value="fsrfg">FSR FG</option>
+          <option value="xefg">XeFG</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>RCAS Sharpening</label>
+        <select id="mf-rcas">
+          <option value="false">Desativado</option>
+          <option value="true">Ativado</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Spoofing GPU</label>
+        <select id="mf-spoof">
+          <option value="auto">Auto</option>
+          <option value="true">Forçar</option>
+          <option value="false">Desativar</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="mico" title="Abrir pasta do jogo" id="btn-open-folder">
+        <i class="ti ti-folder-open"></i>
+      </button>
+      <button class="mico" title="Desinstalar OptiScaler" id="btn-uninstall" style="color:#e74c3c">
+        <i class="ti ti-trash"></i>
+      </button>
+      <div style="flex:1"></div>
+      <button class="btn-secondary" onclick="closeModal()">Fechar</button>
+      <button class="btn-primary" id="btn-apply">Instalar / Aplicar</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>

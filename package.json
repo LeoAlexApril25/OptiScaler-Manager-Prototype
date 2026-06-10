@@ -1,11 +1,27 @@
 {
-  "name":"optiscaler-manager",
-  "version":"0.1.0",
-  "main":"main.js",
+  "name": "optiscaler-manager",
+  "version": "1.0.0",
+  "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.seunome.optiscaler-manager",
+    "productName": "OptiScaler Manager",
+    "win": {
+      "icon": "assets/icons/icon.ico",
+      "target": "nsis"
+    },
+    "directories": {
+      "output": "dist"
+    }
   },
   "devDependencies": {
-    "electron": "^25.0.0"
+    "electron": "^42.3.3",
+    "electron-builder": "^26.15.2"
+  },
+  "dependencies": {
+    "@tabler/icons-webfont": "^3.44.0"
   }
 }

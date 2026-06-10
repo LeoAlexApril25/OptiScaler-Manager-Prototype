@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img">
+  <title>OptiScaler Manager Eagle Icon 512</title>
+  <defs>
+    <radialGradient id="bg-grad" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#1c1a14"/>
+      <stop offset="100%" stop-color="#0a0a08"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c9a227" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold-main" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#f5d060"/>
+      <stop offset="35%"  stop-color="#c9a227"/>
+      <stop offset="70%"  stop-color="#a07818"/>
+      <stop offset="100%" stop-color="#c9a227"/>
+    </linearGradient>
+    <linearGradient id="gold-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#fff0a0"/>
+      <stop offset="50%"  stop-color="#f5d060"/>
+      <stop offset="100%" stop-color="#c9a227"/>
+    </linearGradient>
+    <linearGradient id="gold-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#6b5010"/>
+    </linearGradient>
+    <linearGradient id="body-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#e8e0c8"/>
+      <stop offset="40%"  stop-color="#c8b87a"/>
+      <stop offset="100%" stop-color="#8a7040"/>
+    </linearGradient>
+    <linearGradient id="head-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="60%"  stop-color="#e8e8e0"/>
+      <stop offset="100%" stop-color="#c0bfb0"/>
+    </linearGradient>
+    <linearGradient id="beak-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#f5d060"/>
+      <stop offset="100%" stop-color="#8a6010"/>
+    </linearGradient>
+    <linearGradient id="wing-l" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#f5d060"/>
+      <stop offset="30%"  stop-color="#c9a227"/>
+      <stop offset="65%"  stop-color="#8a6818"/>
+      <stop offset="100%" stop-color="#4a3808"/>
+    </linearGradient>
+    <linearGradient id="wing-r" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#f5d060"/>
+      <stop offset="30%"  stop-color="#c9a227"/>
+      <stop offset="65%"  stop-color="#8a6818"/>
+      <stop offset="100%" stop-color="#4a3808"/>
+    </linearGradient>
+    <clipPath id="icon-clip">
+      <rect x="0" y="0" width="512" height="512" rx="110"/>
+    </clipPath>
+  </defs>
+
+  <rect width="512" height="512" rx="110" fill="url(#bg-grad)"/>
+  <rect width="512" height="512" rx="110" fill="url(#glow)"/>
+  <rect width="512" height="512" rx="110" fill="none" stroke="#c9a227" stroke-width="1.5" stroke-opacity="0.12"/>
+  <rect x="8" y="8" width="496" height="496" rx="104" fill="none" stroke="#c9a227" stroke-width="0.8" stroke-opacity="0.07"/>
+
+  <g clip-path="url(#icon-clip)">
+    <!-- ASA ESQUERDA -->
+    <path d="M256,260 Q200,220 120,160 Q90,145 60,155 Q80,170 95,185 Q60,175 40,190 Q70,198 90,210 Q55,205 42,225 Q75,228 100,238 Q68,240 58,260 Q90,258 118,265 Q88,272 82,292 Q112,285 142,290 Q118,300 116,320 Q145,308 170,315 Q155,328 160,348 Q185,332 210,338 Q200,355 208,372 Q230,352 256,355 Z" fill="url(#wing-l)" stroke="#4a3808" stroke-width="0.8"/>
+    <path d="M256,280 Q220,265 180,255 Q160,252 140,258" fill="none" stroke="#f5d060" stroke-width="1" stroke-opacity="0.4"/>
+    <path d="M256,300 Q215,288 172,282 Q150,280 128,288" fill="none" stroke="#f5d060" stroke-width="1" stroke-opacity="0.3"/>
+    <path d="M256,320 Q218,310 175,308 Q155,308 138,316" fill="none" stroke="#f5d060" stroke-width="1" stroke-opacity="0.25"/>
+    <path d="M256,260 Q200,220 120,160 Q90,145 60,155" fill="none" stroke="#f5d060" stroke-width="1.5" stroke-opacity="0.6"/>
+
+    <!-- ASA DIREITA -->
+    <path d="M256,260 Q312,220 392,160 Q422,145 452,155 Q432,170 417,185 Q452,175 472,190 Q442,198 422,210 Q457,205 470,225 Q437,228 412,238 Q444,240 454,260 Q422,258 394,265 Q424,272 430,292 Q400,285 370,290 Q394,300 396,320 Q367,308 342,315 Q357,328 352,348 Q327,332 302,338 Q312,355 304,372 Q282,352 256,355 Z" fill="url(#wing-r)" stroke="#4a3808" stroke-width="0.8"/>
+    <path d="M256,280 Q292,265 332,255 Q352,252 372,258" fill="none" stroke="#f5d060" stroke-width="1" stroke-opacity="0.4"/>
+    <path d="M256,300 Q297,288 340,282 Q362,280 384,288" fill="none" stroke="#f5d060" stroke-width="1" stroke-opacity="0.3"/>
+    <path d="M256,320 Q294,310 337,308 Q357,308 374,316" fill="none" stroke="#f5d060" stroke-width="1" stroke-opacity="0.25"/>
+    <path d="M256,260 Q312,220 392,160 Q422,145 452,155" fill="none" stroke="#f5d060" stroke-width="1.5" stroke-opacity="0.6"/>
+
+    <!-- CORPO -->
+    <ellipse cx="256" cy="330" rx="52" ry="68" fill="url(#body-grad)" stroke="#8a6818" stroke-width="0.8"/>
+    <path d="M230,290 Q256,283 282,290 Q278,300 256,303 Q234,300 230,290 Z" fill="#c9a227" fill-opacity="0.3"/>
+    <path d="M226,305 Q256,297 286,305 Q282,316 256,319 Q230,316 226,305 Z" fill="#c9a227" fill-opacity="0.25"/>
+    <path d="M224,321 Q256,313 288,321 Q284,332 256,335 Q228,332 224,321 Z" fill="#c9a227" fill-opacity="0.2"/>
+    <path d="M225,337 Q256,329 287,337 Q283,348 256,351 Q229,348 225,337 Z" fill="#c9a227" fill-opacity="0.15"/>
+
+    <!-- CAUDA -->
+    <path d="M214,375 Q256,390 298,375 Q285,405 270,420 Q256,428 242,420 Q227,405 214,375 Z" fill="url(#gold-dark)" stroke="#4a3808" stroke-width="0.8"/>
+
+    <!-- GARRAS -->
+    <path d="M230,388 Q218,395 210,408 Q205,416 212,420 Q218,416 222,408 Q222,418 228,422 Q234,418 232,408 Q236,417 243,418 Q247,412 242,404 Q238,395 234,388 Z" fill="url(#beak-grad)" stroke="#6b5010" stroke-width="0.6"/>
+    <path d="M282,388 Q294,395 302,408 Q307,416 300,420 Q294,416 290,408 Q290,418 284,422 Q278,418 280,408 Q276,417 269,418 Q265,412 270,404 Q274,395 278,388 Z" fill="url(#beak-grad)" stroke="#6b5010" stroke-width="0.6"/>
+
+    <!-- PESCOÇO -->
+    <path d="M236,248 Q256,240 276,248 L278,272 Q256,265 234,272 Z" fill="url(#head-grad)" stroke="#a09080" stroke-width="0.5"/>
+
+    <!-- CABEÇA -->
+    <ellipse cx="256" cy="218" rx="46" ry="44" fill="url(#head-grad)" stroke="#b0a890" stroke-width="0.8"/>
+    <path d="M216,210 Q220,185 256,178 Q292,185 296,210 Q278,200 256,198 Q234,200 216,210 Z" fill="url(#gold-light)" stroke="#8a6818" stroke-width="0.6"/>
+
+    <!-- MÁSCARA -->
+    <path d="M220,215 Q232,205 256,208 Q280,205 292,215 Q288,232 256,236 Q224,232 220,215 Z" fill="#2a2218" fill-opacity="0.85"/>
+
+    <!-- OLHO ESQUERDO -->
+    <ellipse cx="237" cy="218" rx="11" ry="11" fill="#1a1408"/>
+    <ellipse cx="237" cy="218" rx="8" ry="8" fill="#c9a227"/>
+    <ellipse cx="237" cy="218" rx="5" ry="5" fill="#0a0806"/>
+    <ellipse cx="234" cy="215" rx="2" ry="2" fill="#ffffff" fill-opacity="0.9"/>
+    <ellipse cx="237" cy="218" rx="8" ry="8" fill="none" stroke="#f5d060" stroke-width="1"/>
+
+    <!-- OLHO DIREITO -->
+    <ellipse cx="275" cy="218" rx="11" ry="11" fill="#1a1408"/>
+    <ellipse cx="275" cy="218" rx="8" ry="8" fill="#c9a227"/>
+    <ellipse cx="275" cy="218" rx="5" ry="5" fill="#0a0806"/>
+    <ellipse cx="272" cy="215" rx="2" ry="2" fill="#ffffff" fill-opacity="0.9"/>
+    <ellipse cx="275" cy="218" rx="8" ry="8" fill="none" stroke="#f5d060" stroke-width="1"/>
+
+    <!-- BICO -->
+    <path d="M242,232 Q256,228 270,232 Q268,244 256,256 Q244,244 242,232 Z" fill="url(#beak-grad)" stroke="#6b5010" stroke-width="0.8"/>
+    <ellipse cx="252" cy="236" rx="3" ry="2" fill="#4a3808" fill-opacity="0.5"/>
+    <ellipse cx="260" cy="236" rx="3" ry="2" fill="#4a3808" fill-opacity="0.5"/>
+  </g>
+
+  <rect x="3" y="3" width="506" height="506" rx="108" fill="none" stroke="#c9a227" stroke-width="2.5" stroke-opacity="0.5"/>
+  <rect x="7" y="7" width="498" height="498" rx="105" fill="none" stroke="#f5d060" stroke-width="1" stroke-opacity="0.2"/>
+</svg>
