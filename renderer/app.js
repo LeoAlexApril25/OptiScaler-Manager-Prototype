@@ -136,11 +136,45 @@ async function addGame() {
     document.getElementById('btn-add-first').addEventListener('click', addGame)
 }
 
+// Botão de Instalar / Aplicar
+document.getElementById('btn-apply').addEventListener('click', async () => {
+    if(!currentGame) return
+
+    const config = {
+        upscaler: document.getElementById('mf-upscaler').value,
+        quality: document.getElementById('mf-quality').value,
+        fg:      document.getElementById('mf-fg').value,
+        rcas:    document.getElementById('mf-rcas').value,
+        spoof:   document.getElementById('mf-spoof').value,
+    }
+
+    const dllName = document.getElementById('mf-dll').value
+
+    const result = await window.api.installOptiScaler({
+        gamePath: currentGame.path,
+        dllName: dllName,
+        config: config
+    })
+
+    if(result.success) {
+        // Marca o jogo como instalado
+        currentGame.installed = true
+        renderGames()
+        closeModal()
+        alert('✅ OptiScaler instalado com sucesso em:\n' + currentGame.path)
+    }else{
+        alert('❌ Erro ao instalar o OptiScaler:\n' + result.error)
+    }
+})
+
 // Detectar GPU ao abrir
 window.api.detectGpu().then(gpu => {
     document.getElementById('gpu-name').innerHTML =
     `<b style="color:var(--text)">GPU detectada:</b> ${gpu}`
 })
+
+// Botão Desinstalar
+
 
 
 // Inicializar

@@ -63,3 +63,98 @@ ipcMain.handle('select-folder', async () => {
     if(result.canceled) return null
     return result.filePaths[0]
 })
+
+// Instalar OptiScaler num  jogo
+ipcMain.handle('install-optiscaler', async( event, { gamePath, dllName, config}) => {
+    try{
+        const fs = require('fs')
+        const assetsPath = path.join(__dirname, 'assets', 'optiscaler')
+
+        //Lista de arquivos para copiar
+        const filesToCopy = [
+            'fakenvapi.dll',
+            'fakenvapi.ini',
+            'libxess.dll',
+            'libxess_dx11.dll',
+            'libxess_fg.dll',
+            'amd_fidelityfx_framegeneration_dx12.dll',
+            'amd_fidelityfx_upscaler_dx12.dll',
+            'amd_fidelityfx_vk.dll',
+            'dlssg_to_fsr3_amd_is_better.dll'
+        ]
+
+        // Copia  cada arquivo para a pasta do jogo
+        for (const file of filesToCopy){
+            const src = path.join(assetsPath, file)
+            const dst = path.join(gamePath, file)
+            if(fs.existsSync(src)) {
+                fs.copyFileSync(src, dst)
+            }
+        }
+
+        // Copia o OptiScaler .dll com o nome escolhido (ex: dxgi.dll)
+        fs.copyFileSync(
+            path.join(assetsPath, 'OptiScaler.dll'),
+            path.join(gamePath, dllName)
+        )
+
+        // Gera o OptiScaler.ini com as configurações
+        const ini = generateIni(config)
+        fs.writeFileSync(path.join(gamePath, 'OptiScaler.ini'), ini, 'utf8')
+
+        return { success: true}
+
+    } catch(err){
+        return { success: false, error: err.message}
+    }
+})
+
+// Desistalar OptiScaler
+ipcMain.handle('uninstall-optiscaler', async (event, { gamePath, dllName}) => {
+    try {
+        const fs = require('fs')
+
+        const filesToDelete = [
+            dllName,
+            'OptiScaler.ini',
+            'fakenvapi.dll',
+            'fakenvapi.ini',
+            'libxess.dll',
+            'libxess_dx11.dll',
+            'libxess_fg.dll',
+            'amd_fidelityfx_dx12.dll',
+            'amd_fidelity_framegeneration_dx12.dll',
+            'amd_fidelityfx_upscaler_dx12.dll',
+            'amd_fidelityfx_vk.dll',
+            'dlssg_to_fsr3_amd_is_better.dll'
+            
+        ]
+
+        for (const file of filesToDelete){
+            const filePath = path.join(gamePath, file)
+            if (fs.existsSync(filePath)){
+                fs.unlinkSync(filePath)
+            }
+        }
+
+        return { success: true}
+
+    } catch(err) {
+        return { success: false, error: err.message}
+
+    }
+})
+
+// Gerar OptiScaler.ini
+function generateIni(config){
+    return `[OptiScaler]
+Dx12Upscaler=${config.upscaler || 'auto'}
+QualityOverride=${config.quality || 'auto'}
+RcasEnabled=${config.rcas || 'false'}
+DxgiSpoofing=${config.spoof || 'auto'}
+
+[FrameGeneration]
+Fsr3FgEnabled=${config.fg === 'fsrfg' ? 'true' : 'false'}
+XeFgEnabled=${config.fg === 'xefg' ? 'true' : 'false'}`
+
+}
