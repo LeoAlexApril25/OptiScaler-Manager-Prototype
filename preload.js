@@ -9,7 +9,8 @@ contextBridge.exposeInMainWorld('api', {
     detectGpu: () => ipcRenderer.invoke('detect-gpu'),
     selectFolder: () => ipcRenderer.invoke('select-folder'),
     installOptiScaler : (data) => ipcRenderer.invoke('install-optiscaler',data),
-    unistallOptiScaler: (data) => ipcRenderer.invoke('uninstall-optiscaler', data),
+    uninstallOptiScaler: (data) => ipcRenderer.invoke('uninstall-optiscaler', data),
+    openFolder:  (path) => ipcRenderer.invoke('open-folder',path),
 
     // Futuramente: instalar, remover, listar jogos...
 

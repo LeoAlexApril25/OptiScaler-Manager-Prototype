@@ -1,3 +1,5 @@
+//const { mkdirSync } = require("original-fs")
+
 let games = []
 let currentGame = null
 
@@ -30,7 +32,7 @@ function toggleView(){
     const grids = document.querySelectorAll('.games-grid')
     const isList = btn.classList.contains('active')
     grids.forEach( g=> {
-        g.style.gridTemplateColumns = isList ? '1fr' : 'repeat(auto-fill, minmax(100px, 1fr)'
+        g.style.gridTemplateColumns = isList ? '1fr' : 'repeat(auto-fill, minmax(100px, 1fr))'
     })
     btn.querySelector('i').className = isList ? 'ti ti-list': 'ti ti-layout-grid'
 }
@@ -43,7 +45,7 @@ function setLibTab(el) {
 }
 
 // Modal
-function openModel(game) {
+function openModal(game) {
     currentGame = game
     document.getElementById('modal-title').textContent = game.name
     document.getElementById('modal-path').textContent = game.path
@@ -99,7 +101,7 @@ function renderGames(){
         <span class="gf-ver">${game.installed ? '✓' : 'N/A'}</span>
       </div>
     `
-    card.addEventListener('click', () => openModel(game))
+    card.addEventListener('click', () => openModal(game))
     grid.appendChild(card)
 })
 
@@ -110,10 +112,24 @@ area.insertBefore(grid, empty)
 
 }
 
-document.getElementById('btn-add-game').addEventListener('click',addGame)
-document.getElementById('btn-add-first').addEventListener('click',addGame)
+function showToast(msg, isError = false) {
+    const existing = document.getElementById('toast')
+    if(existing) existing.remove()
+    const toast = document.createElement('div')
+    toast.id = 'toast'
+    toast.textContent = msg
+    toast.style.cssText = `
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:${isError ? '#c0392b' : '#27ae60'}; color:#fff;
+    padding:10px 22px; border-radius:8px; font-size:13px;
+    z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,.4); transition:opacity .3s;
+  `
 
-// Adicionar jogo
+    document.body.appendChild(toast)
+    setTimeout(() => {toast.style.opacity='0';
+    setTimeout(() => toast.remove(), 300)
+})
+}
 
 async function addGame() {
     const folderPath = await window.api.selectFolder()
@@ -132,8 +148,6 @@ async function addGame() {
 
     renderGames()
 
-    document.getElementById('btn-add-game').addEventListener('click', addGame)
-    document.getElementById('btn-add-first').addEventListener('click', addGame)
 }
 
 // Botão de Instalar / Aplicar
@@ -174,8 +188,39 @@ window.api.detectGpu().then(gpu => {
 })
 
 // Botão Desinstalar
+document.getElementById('btn-uninstall').addEventListener('click', async () => {
+    if (!currentGame) return
+
+    const dllName = document.getElementById('mf-dll').value
+    const confirmar = confirm(`Remover OptiScaler de:\n${currentGame.path}?`)
+    if (!confirmar) return
+
+    const result = await window.api.uninstallOptiScaler({
+        gamePath: currentGame.path,
+        dllName: dllName
+    })
+
+    if(result.success){
+        currentGame.installed = false
+        renderGames()
+        closeModal()
+        alert('✅ OptiScaler removido com sucesso!')
+    } else {
+        alert('❌ Erro ao remover o OptiScaler:\n' + result.error)
+    }
+})
 
 
+
+// Botão Abrir pastas
+document.getElementById('btn-open-folder').addEventListener('click', () => {
+    if(!currentGame) return
+    window.api.openFolder(currentGame.path)
+})
+
+
+document.getElementById('btn-add-game').addEventListener('click', addGame)
+document.getElementById('btn-add-first').addEventListener('click', addGame)
 
 // Inicializar
 renderGames()

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu, dialog } = require('electron'); // Estes módulos são necessários para criar a janela da aplicação e lidar com a comunicação entre o processo principal e o processo de renderização
+const { app, BrowserWindow, ipcMain, Menu, dialog, shell } = require('electron'); // Estes módulos são necessários para criar a janela da aplicação e lidar com a comunicação entre o processo principal e o processo de renderização
 
 const path = require('path'); // Este módulo é necessário para lidar com caminhos de arquivos de forma cross-platform
 
@@ -28,7 +28,7 @@ Menu.setApplicationMenu(null) // Esta linha remove o menu padrão da aplicação
 app.whenReady().then(createWindow) // Este método é chamado quando a aplicação está pronta e chama a função createWindow para criar a janela da aplicação
 
 app.on('window-all-closed', () => {
-    if(process.plaform !== 'darwin') app.quit();
+    if(process.platform !== 'darwin') app.quit();
 }) // Este método é chamado quando todas as janelas da aplicação são fechadas e, se o sistema operacional não for macOS, a aplicação é encerrada
 
 // Detectar GPU via PowerShell
@@ -46,7 +46,7 @@ ipcMain.handle('detect-gpu', async () => {
 
 ipcMain.on('window-minimize', () => BrowserWindow.getFocusedWindow()?.minimize()) // Este método é chamado quando o evento 'window-minimize' é recebido e minimiza a janela da aplicação
 
-ipcMain.on('window-maximixe', () => {
+ipcMain.on('window-maximize', () => {
     const win =BrowserWindow.getFocusedWindow();
     win?.isMaximized() ? win.unmaximize() : win?.maximize(); // Este método é chamado quando o evento 'window-maximize' é recebido e alterna entre maximizar e restaurar a janela da aplicação
 })
@@ -123,7 +123,7 @@ ipcMain.handle('uninstall-optiscaler', async (event, { gamePath, dllName}) => {
             'libxess_dx11.dll',
             'libxess_fg.dll',
             'amd_fidelityfx_dx12.dll',
-            'amd_fidelity_framegeneration_dx12.dll',
+            'amd_fidelityfx_framegeneration_dx12.dll',
             'amd_fidelityfx_upscaler_dx12.dll',
             'amd_fidelityfx_vk.dll',
             'dlssg_to_fsr3_amd_is_better.dll'
@@ -143,6 +143,11 @@ ipcMain.handle('uninstall-optiscaler', async (event, { gamePath, dllName}) => {
         return { success: false, error: err.message}
 
     }
+})
+
+// Abrir pasta do jogo
+ipcMain.handle('open-folder', (event,folderPath) => {
+    shell.openPath(folderPath)
 })
 
 // Gerar OptiScaler.ini
