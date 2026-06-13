@@ -6,6 +6,9 @@ const fs = require('fs');// Este módulo é necessário para ler o arquivo de co
 
 const { execSync } = require('child_process'); // Este módulo é necessário para executar comandos do sistema operacional
 
+let gamesFilePath // ← declarado fora, inicializado dentro do whenReady
+
+
 function createWindow(){
     const win = new BrowserWindow({
         width: 1100,
@@ -25,7 +28,11 @@ function createWindow(){
 }
 Menu.setApplicationMenu(null) // Esta linha remove o menu padrão da aplicação
 
-app.whenReady().then(createWindow) // Este método é chamado quando a aplicação está pronta e chama a função createWindow para criar a janela da aplicação
+app.whenReady().then(() => {
+    gamesFilePath = path.join(app.getPath('userData'), 'games.json')
+    createWindow()
+}
+)// Este método é chamado quando a aplicação está pronta e chama a função createWindow para criar a janela da aplicação
 
 app.on('window-all-closed', () => {
     if(process.platform !== 'darwin') app.quit();
@@ -146,8 +153,29 @@ ipcMain.handle('uninstall-optiscaler', async (event, { gamePath, dllName}) => {
 })
 
 // Abrir pasta do jogo
-ipcMain.handle('open-folder', (event,folderPath) => {
+ipcMain.on('open-folder', (event,folderPath) => {
     shell.openPath(folderPath)
+})
+
+
+// Salvar jogos em disco
+ipcMain.handle('save-games', (event, games) => {
+    try {
+        fs.writeFileSync(gamesFilePath, JSON.stringify(games, null, 2), 'utf8')
+        return { success: true}
+    } catch (err) {
+        return { success: false, error: err.message}
+    }
+})
+
+ipcMain.handle('load-games', () => {
+    try{
+        if(!fs.existsSync(gamesFilePath)) return []
+        const data = fs.readFileSync(gamesFilePath, 'utf8')
+        return JSON.parse(data) // returna os jogos carregados ou um array vazio se o arquivo não existir
+    } catch {
+        return []
+    }
 })
 
 // Gerar OptiScaler.ini

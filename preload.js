@@ -11,6 +11,8 @@ contextBridge.exposeInMainWorld('api', {
     installOptiScaler : (data) => ipcRenderer.invoke('install-optiscaler',data),
     uninstallOptiScaler: (data) => ipcRenderer.invoke('uninstall-optiscaler', data),
     openFolder:  (path) => ipcRenderer.invoke('open-folder',path),
+    saveGames: (games) => ipcRenderer.invoke('save-games', games),
+    loadGames: () => ipcRenderer.invoke('load-games'),
 
     // Futuramente: instalar, remover, listar jogos...
 

@@ -143,7 +143,8 @@ async function addGame() {
     games.push({
         name: name,
         path: folderPath,
-        installed: false
+        installed: false,
+        dllName: null
     })
 
     
@@ -151,6 +152,7 @@ async function addGame() {
     document.getElementById('btn-add-first').addEventListener('click',   addGame)
 
     renderGames()
+    await window.api.saveGames(games)
 
 }
 
@@ -175,11 +177,13 @@ document.getElementById('btn-apply').addEventListener('click', async () => {
     })
 
     if(result.success) {
-        // Marca o jogo como instalado
+        const installedPath = currentGame.path
         currentGame.installed = true
+        currentGame.dllName = dllName
+        await window.api.saveGames(games) // ← adiciona essa linha
         renderGames()
         closeModal()
-        alert('✅ OptiScaler instalado com sucesso em:\n' + currentGame.path)
+        showToast('✅ OptiScaler instalado em: ' + installedPath)
     }else{
         alert('❌ Erro ao instalar o OptiScaler:\n' + result.error)
     }
@@ -210,9 +214,11 @@ document.getElementById('btn-uninstall').addEventListener('click', async () => {
 
     if(result.success){
         currentGame.installed = false
+        currentGame.dllName = null
+        await window.api.saveGames(games) // ← adiciona essa linha
         renderGames()
         closeModal()
-        alert('✅ OptiScaler removido com sucesso!')
+        showToast('✅ OptiScaler removido com sucesso!')
     } else {
         alert('❌ Erro ao remover o OptiScaler:\n' + result.error)
     }
@@ -287,6 +293,14 @@ if (savedTheme) applyTheme(savedTheme)
 
 document.getElementById('btn-add-game').addEventListener('click', addGame)
 document.getElementById('btn-add-first').addEventListener('click', addGame)
+
+//Carrega jogo salvos ao iniciar
+window.api.loadGames().then(saved => {
+    if(saved && saved.length > 0){
+      games = saved
+      renderGames()
+    }
+})
 
 // Inicializar
 renderGames()
