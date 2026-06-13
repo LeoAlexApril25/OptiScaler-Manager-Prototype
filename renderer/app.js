@@ -128,7 +128,7 @@ function showToast(msg, isError = false) {
     document.body.appendChild(toast)
     setTimeout(() => {toast.style.opacity='0';
     setTimeout(() => toast.remove(), 300)
-})
+},3000)
 }
 
 async function addGame() {
@@ -145,6 +145,10 @@ async function addGame() {
         path: folderPath,
         installed: false
     })
+
+    
+    document.getElementById('btn-add-game').addEventListener('click', addGame)
+    document.getElementById('btn-add-first').addEventListener('click',   addGame)
 
     renderGames()
 
@@ -183,10 +187,14 @@ document.getElementById('btn-apply').addEventListener('click', async () => {
 
 // Detectar GPU ao abrir
 window.api.detectGpu().then(gpu => {
-    document.getElementById('gpu-name').innerHTML =
+  document.getElementById('gpu-name').innerHTML =
     `<b style="color:var(--text)">GPU detectada:</b> ${gpu}`
-})
 
+  // Se não tiver tema salvo, aplica o tema da GPU automaticamente
+  if (!localStorage.getItem('theme')) {
+    applyThemeAuto(gpu)
+  }
+})
 // Botão Desinstalar
 document.getElementById('btn-uninstall').addEventListener('click', async () => {
     if (!currentGame) return
@@ -218,6 +226,64 @@ document.getElementById('btn-open-folder').addEventListener('click', () => {
     window.api.openFolder(currentGame.path)
 })
 
+
+// Temas
+const themes = {
+    black: { bg: '#111111', bg2: '#1a1a1a', bg3: '#2e2e2e', text:'#e8e8e8', text2: '#a0a0a0', border: '#3a3a3a', accent:'#e67e22'},
+    white: { bg: '#f0f0f0', bg2: '#e0e0e0', bg3: '#d0d0d0', text: '#111111', text2: '#555555', border: '#bbbbbb', accent: '#333333'},
+    amd_dark: { bg: '#1a0000', bg2: '#2a0a0a', bg3: '#3a1a1a', text: '#e8e8e8', text2: '#a08080', border: '#4a2020', accent: '#ed1c24'},
+    amd_light:{ bg: '#2a0000', bg2: '#380808', bg3: '#4a1010', text: '#e8e8e8', text2: '#b08080', border: '#5a2020', accent: '#ed1c24'},
+    nvidia_dark: { bg: '#0a1f0a', bg2: '#122212', bg3: '#1a3a1a', text: '#e8e8e8', text2: '#90b890', border: '#254025', accent: '#76b900' },
+    nvidia_light: { bg: '#0d2a0d', bg2: '#163016', bg3: '#1e3e1e', text:'#e8e8e8', text2: '#90b890', border: '#2a4a2a', accent: '#76b900' },
+    intel_dark: { bg: '#001020', bg2: '#001a30', bg3: '#102030', text: '#e8e8e8', text2: '#8090a8', border: '#1a2a40', accent: '#0071c5'},
+    intel_light: { bg: '#000d1a', bg2: '#002040', bg3: '#081828', text: '#e8e8e8', text2: '#8090b0', border: '#103050', accent: '#0071c5'}
+
+}
+
+function applyTheme(name){
+    const t = themes[name]
+    if(!t) return
+    const root = document.documentElement
+    root.style.setProperty('--bg',     t.bg)
+    root.style.setProperty('--bg2',    t.bg2)
+    root.style.setProperty('--bg3',    t.bg3)
+    root.style.setProperty('--text',   t.text)
+    root.style.setProperty('--text2',  t.text2)
+    root.style.setProperty('--border', t.border)
+    root.style.setProperty('--accent', t.accent)
+
+    // salva no localStorage para lembrar na próxima vez
+    localStorage.setItem('theme', name)
+    
+    // marca o swatch slecionado
+    document.querySelectorAll('.swatch').forEach( s => s.classList.remove('se12'))
+    const active = document.querySelector(`[data-theme="${name}"]`)
+    if (active) active.classList.add('se12')
+    
+}
+
+function applyThemeAuto(gpuName){
+    const gpu = gpuName.toLowerCase()
+    if (gpu.includes('amd') || gpu.includes('radeon')) {
+        applyTheme('amd_dark')
+    } else if (gpu.includes('nvidia') || gpu.includes('geforce')){
+        applyTheme('nvidia_dark')
+    } else if (gpu.includes('intel')){
+        applyTheme('intel_dark')
+    } else {
+        applyTheme('black')
+    }
+}
+
+document.getElementById('auto-theme').addEventListener('change', function (){
+    if(this.checked) {
+        window.api.detectGpu().then(gpu => applyThemeAuto(gpu))
+    }
+})
+
+// Carrega tema salvo ao iniciar
+const savedTheme = localStorage.getItem('theme')
+if (savedTheme) applyTheme(savedTheme)
 
 document.getElementById('btn-add-game').addEventListener('click', addGame)
 document.getElementById('btn-add-first').addEventListener('click', addGame)

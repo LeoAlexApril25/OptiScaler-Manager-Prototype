@@ -139,6 +139,45 @@
       <div class="settings-area">
         <div class="s-section">
           <h3>Upscaler padrão global</h3>
+            <!-- NOVO — cola isso aqui -->
+    <div class="s-section">
+      <h3>Aparência — tema do app</h3>
+      <div class="theme-grid">
+        <div class="swatch sw-black sel2" data-theme="preto" onclick="applyTheme('preto')">
+          <div class="swatch-lbl">Preto</div>
+        </div>
+        <div class="swatch sw-white" data-theme="white" onclick="applyTheme('branco')">
+          <div class="swatch-lbl">Branco</div>
+        </div>
+        <div class="swatch sw-amd" data-theme="amd_dark" onclick="applyTheme('amd_dark')">
+          <div class="swatch-lbl">AMD Dark</div>
+        </div>
+        <div class="swatch sw-amd2" data-theme="amd_light" onclick="applyTheme('amd_vivo')">
+          <div class="swatch-lbl">AMD Light</div>
+        </div>
+        <div class="swatch sw-nv" data-theme="nvidia_dark" onclick="applyTheme('nvidia_dark')">
+          <div class="swatch-lbl">NVIDIA Dark</div>
+        </div>
+        <div class="swatch sw-nv2" data-theme="nvidia_light" onclick="applyTheme('nvidia_vivo')">
+          <div class="swatch-lbl">NVIDIA Light</div>
+        </div>
+        <div class="swatch sw-intel" data-theme="intel_dark" onclick="applyTheme('intel_dark')">
+          <div class="swatch-lbl">Intel Dark</div>
+        </div>
+        <div class="swatch sw-intel2" data-theme="intel_light" onclick="applyTheme('intel_vivo')">
+          <div class="swatch-lbl">Intel Light</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;align-items:center;gap:8px">
+        <label class="toggle">
+          <input type="checkbox" id="auto-theme">
+          <div class="tslider"></div>
+        </label>
+        <span style="font-size:12px;color:var(--text)">
+          Detectar GPU e aplicar tema automaticamente
+        </span>
+      </div>
+    </div>
           <div class="s-row">
             <div>
               <div class="s-label">Upscaler</div>
